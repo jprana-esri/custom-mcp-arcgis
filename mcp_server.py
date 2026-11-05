@@ -530,6 +530,19 @@ async def select_layer_by_location(in_layer: str, select_features: str, where_fi
         print(GetMessage(3))
         return {"message": GetMessage(2)}
 
+@mcp.resource("config://application")
+def get_application_config() -> str:
+    """Get application configuration."""
+
+    return """
+    {
+        "mcp_server_name": "{SERVER_NAME}",
+        "api_key": "{API_KEY}",
+        "arcgis_workspace": "{ARCGIS_WORKSPACE}",
+        "temporary_dir": "{TEMPORARY_DIR}"
+    }
+    """
+
 def main():
     # Initialize and run the server
     mcp.run(transport="streamable-http")
