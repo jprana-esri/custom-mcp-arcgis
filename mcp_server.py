@@ -2,23 +2,24 @@ import json
 import uuid
 import datetime
 import os
-from asyncio import timeout
-from typing import Any, List, Coroutine
+from typing import List
 
 from arcgis.features import FeatureLayer, FeatureLayerCollection
 from mcp.server import MCPServer
 from arcgis.gis import GIS, SharingLevel
+from dotenv import load_dotenv
 
 import httpx
 
 # Constants variables
-SERVER_NAME = "custom-mcp-arcgis";
-API_KEY = ""
-GEOCODE_FIND_ADDRESS_URL = "https://geocode-api.arcgis.com/arcgis/rest/services/World/GeocodeServer/findAddressCandidates"
+load_dotenv(dotenv_path='.env')
+SERVER_NAME = os.getenv("MCP_SERVER_NAME")
+API_KEY = os.getenv("API_KEY")
+GEOCODE_FIND_ADDRESS_URL = os.getenv("GEOCODE_FIND_ADDRESS_URL")
 # example = r"C:\Users\<Username>\Documents\ArcGIS\Projects\MyProject\MyProject.gdb"
-ARCGIS_WORKSPACE = r""
+ARCGIS_WORKSPACE = os.getenv("ARCGIS_WORKSPACE")
 # example = r"D:\projects\python\custom-mcp-arcgis"
-TEMPORARY_DIR = r""
+TEMPORARY_DIR = os.getenv("TEMPORARY_DIR")
 
 # Import arcpy modules
 print(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), "import arcpy modules...")
